@@ -25,13 +25,13 @@ public interface VehicleRepository extends JpaRepository<VehicleDTO, Long> {
     List<Object[]> findAllWithOwner();
 
     // Find vehicle details with owner first name using native SQL query
-    @Query(value = "SELECT v.vehicle_id, v.car_transmission, v.engine, v.make, " +
-                   "v.model, v.price, v.registration, v.year, " +
-                   "v.owner_id, o.firstName " +
-                   "FROM Vehicle v " +
-                   "JOIN Owner o ON v.owner_id = o.owner_id", nativeQuery = true)
+    @Query(value = "SELECT VEHICLE.VEHICLE_ID, VEHICLE.CAR_TRANSMISSION, VEHICLE.ENGINE, VEHICLE.MAKE, " +
+            "VEHICLE.MODEL, VEHICLE.PRICE, VEHICLE.REGISTRATION, VEHICLE.YEAR, " +
+            "VEHICLE.OWNER_ID, OWNER.FIRST_NAME " +
+            "FROM VEHICLE " +
+            "JOIN OWNER ON VEHICLE.OWNER_ID = OWNER.OWNER_ID", nativeQuery = true)
     List<Object[]> getVehicleDetailsWithOwnerFirstName();
-
+    
     // Find maintenance records by vehicle make using JPQL
     @Query("SELECT m FROM Maintenance m " +
            "JOIN FETCH m.vehicle v " +
