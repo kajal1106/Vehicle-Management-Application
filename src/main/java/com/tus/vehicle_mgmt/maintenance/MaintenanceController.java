@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/maintenance-tasks")
+@RequestMapping("/maintenance")
 public class MaintenanceController {
     private final MaintenanceService maintenanceService;
 
