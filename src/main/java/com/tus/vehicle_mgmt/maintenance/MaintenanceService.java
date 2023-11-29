@@ -17,6 +17,11 @@ public class MaintenanceService {
     public List<MaintenanceDTO> getAllMaintenanceTasks() {
         return maintenanceRepository.findAll();
     }
+    
+    
+    public List<MaintenanceDTO> getMaintenanceByVehicle(Long vehicleid){
+        return maintenanceRepository.findMaintenanceByVehicle(vehicleid);
+    }
 
     public MaintenanceDTO createMaintenanceTask(MaintenanceDTO maintenanceTask) {
         // Implement logic to create a new maintenance task
@@ -43,9 +48,12 @@ public class MaintenanceService {
         }
     }
     
-    public void deleteMaintenanceTask(Long taskId) {
+    public boolean deleteMaintenanceTask(Long taskId) {
         // Implement logic to delete a maintenance task by ID
-        maintenanceRepository.deleteById(taskId);
+        if (maintenanceRepository.existsById(taskId)) {
+            maintenanceRepository.deleteById(taskId);
+            return true;
+        }
+		return false;
     }
-
 }

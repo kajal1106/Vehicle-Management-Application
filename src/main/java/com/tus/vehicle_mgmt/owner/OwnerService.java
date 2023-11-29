@@ -20,8 +20,8 @@ public class OwnerService {
         return ownerRepository.findAll();
     }
 
-    public OwnerDTO getOwnerById(Long ownerId) {
-        Optional<OwnerDTO> ownerOptional = ownerRepository.findById(ownerId);
+    public OwnerDTO getOwnerById(Long ownerid) {
+        Optional<OwnerDTO> ownerOptional = ownerRepository.findById(ownerid);
         return ownerOptional.orElse(null); // or throw an exception if needed
     }
 
@@ -30,22 +30,21 @@ public class OwnerService {
         return ownerRepository.save(ownerDTO);
     }
 
-    public OwnerDTO updateOwner(Long ownerId, OwnerDTO updatedOwnerDTO) {
+    public OwnerDTO updateOwner(Long ownerid, OwnerDTO updatedOwnerDTO) {
         // Additional logic if needed
-        if (ownerRepository.existsById(ownerId)) {
-            updatedOwnerDTO.setId(ownerId);
+        if (ownerRepository.existsById(ownerid)) {
+            updatedOwnerDTO.setId(ownerid);
             return ownerRepository.save(updatedOwnerDTO);
         } else {
-            throw new NoSuchElementException("Owner with ID " + ownerId + " not found");
+            throw new NoSuchElementException("Owner with ID " + ownerid + " not found");
         }
     }
 
-    public void deleteOwner(Long ownerId) {
-        // Additional logic if needed
-        if (ownerRepository.existsById(ownerId)) {
-            ownerRepository.deleteById(ownerId);
-        } else {
-            throw new NoSuchElementException("Owner with ID " + ownerId + " not found");
-        }
+    public boolean deleteOwner(Long ownerid) {
+	 if (ownerRepository.existsById(ownerid)) {
+		 ownerRepository.deleteById(ownerid);
+         return true;
+     }
+     return false;
     }
 }

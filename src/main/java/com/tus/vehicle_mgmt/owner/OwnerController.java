@@ -1,6 +1,8 @@
 package com.tus.vehicle_mgmt.owner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,23 +22,35 @@ public class OwnerController {
         return ownerService.getAllOwners();
     }
 
-    @GetMapping("/{ownerId}")
-    public OwnerDTO getOwnerById(@PathVariable Long ownerId) {
-        return ownerService.getOwnerById(ownerId);
+    @GetMapping("/{ownerid}")
+    public OwnerDTO getOwnerById(@PathVariable Long ownerid) {
+        return ownerService.getOwnerById(ownerid);
     }
 
     @PostMapping
-    public OwnerDTO addOwner(@RequestBody OwnerDTO ownerDTO) {
+    public OwnerDTO createOwner(@RequestBody OwnerDTO ownerDTO) {
         return ownerService.createOwner(ownerDTO);
     }
 
-    @PutMapping("/{ownerId}")
-    public OwnerDTO updateOwner(@PathVariable Long ownerId, @RequestBody OwnerDTO ownerDTO) {
-        return ownerService.updateOwner(ownerId, ownerDTO);
+    @PutMapping("/{ownerid}")
+    public OwnerDTO updateOwner(@PathVariable Long ownerid, @RequestBody OwnerDTO ownerDTO) {
+        return ownerService.updateOwner(ownerid, ownerDTO);
     }
 
-    @DeleteMapping("/{ownerId}")
-    public void deleteOwner(@PathVariable Long ownerId) {
-        ownerService.deleteOwner(ownerId);
+    @DeleteMapping("/{ownerid}")
+    public ResponseEntity<String> deleteOwner(@PathVariable Long ownerid) {
+        try {
+            // Attempt to delete a owner
+            boolean deleted = ownerService.deleteOwner(ownerid);
+            return (deleted) ?
+                    ResponseEntity.ok("Owner deleted successfully") :
+                    ResponseEntity.notFound().build();
+        } catch (Exception e) {
+//            e.printStackTrace();
+            // Handle exceptions when deleting a owner
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error deleting owner");
+        }
     }
+    
 }

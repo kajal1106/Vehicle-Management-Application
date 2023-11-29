@@ -41,8 +41,8 @@ public class VehicleServiceImpl implements VehicleService {
      * @return List of MaintenanceDTO objects for the specified owner ID.
      */
     @Override
-    public List<MaintenanceDTO> getMaintenanceByOwnerId(Long ownerId) {
-        return vehicleRepository.findMaintenanceByOwnerId(ownerId);
+    public List<MaintenanceDTO> getMaintenanceByOwnerId(Long ownerid) {
+        return vehicleRepository.findMaintenanceByOwnerId(ownerid);
     }
 
     /**
@@ -64,8 +64,8 @@ public class VehicleServiceImpl implements VehicleService {
      * @return Optional containing the VehicleDTO if found, empty otherwise.
      */
     @Override
-    public Optional<VehicleDTO> getVehicleById(Long id) {
-        return vehicleRepository.findById(id);
+    public Optional<VehicleDTO> getVehicleById(Long vehicleid) {
+        return vehicleRepository.findById(vehicleid);
     }
 
     /**
@@ -99,8 +99,8 @@ public class VehicleServiceImpl implements VehicleService {
      * @throws NoSuchElementException If the vehicle with the specified ID is not found.
      */
     @Override
-    public VehicleDTO updateVehicle(Long id, VehicleDTO vehicleDTO) {
-        Optional<VehicleDTO> optionalVehicle = vehicleRepository.findById(id);
+    public VehicleDTO updateVehicle(Long vehicleid, VehicleDTO vehicleDTO) {
+        Optional<VehicleDTO> optionalVehicle = vehicleRepository.findById(vehicleid);
         if (optionalVehicle.isPresent()) {
             VehicleDTO existingVehicle = optionalVehicle.get();
             // Use a DTO mapping tool for cleaner code
@@ -111,7 +111,7 @@ public class VehicleServiceImpl implements VehicleService {
             return vehicleRepository.save(existingVehicle);
         } else {
             // Handle not found scenario
-            throw new NoSuchElementException("Vehicle with ID " + id + " not found");
+            throw new NoSuchElementException("Vehicle with ID " + vehicleid + " not found");
         }
     }
 
@@ -122,9 +122,9 @@ public class VehicleServiceImpl implements VehicleService {
      * @return True if the vehicle was deleted, false if it was not found.
      */
     @Override
-    public boolean deleteVehicle(Long id) {
-        if (vehicleRepository.existsById(id)) {
-            vehicleRepository.deleteById(id);
+    public boolean deleteVehicle(Long vehicleid) {
+        if (vehicleRepository.existsById(vehicleid)) {
+            vehicleRepository.deleteById(vehicleid);
             return true;
         }
         return false;

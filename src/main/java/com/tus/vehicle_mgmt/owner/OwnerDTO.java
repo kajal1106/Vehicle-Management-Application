@@ -2,6 +2,7 @@ package com.tus.vehicle_mgmt.owner;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +16,8 @@ import com.tus.vehicle_mgmt.vehicle.VehicleDTO;
 public class OwnerDTO {
 	 @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "owner_id")
-    private Long owner_id;
+    @Column(name = "ownerid")
+    private Long ownerid;
 
     @Column(name = "first_name")
     private String firstName;
@@ -24,7 +25,7 @@ public class OwnerDTO {
     @Column(name = "last_name")
     private String lastName;
     
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<VehicleDTO> vehicles;
 
     // Default constructor for JPA
@@ -32,8 +33,8 @@ public class OwnerDTO {
     }
 
     // Constructor for creating instances
-    public OwnerDTO(Long owner_id, String firstName, String lastName) {
-        this.owner_id = owner_id;
+    public OwnerDTO(Long ownerid, String firstName, String lastName) {
+        this.ownerid = ownerid;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -41,11 +42,11 @@ public class OwnerDTO {
     // Getters and setters
 
     public Long getId() {
-        return owner_id;
+        return ownerid;
     }
 
-    public void setId(Long owner_id) {
-        this.owner_id = owner_id;
+    public void setId(Long ownerid) {
+        this.ownerid = ownerid;
     }
 
     public String getFirstName() {

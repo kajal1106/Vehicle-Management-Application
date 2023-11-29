@@ -54,14 +54,14 @@ public class VehicleController {
     
     
     // Endpoint for retrieving a vehicle by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<VehicleDTO> getVehicleById(@PathVariable Long vehicle_id) {
-        return vehicleService.getVehicleById(vehicle_id)
+    @GetMapping("/{vehicleid}")
+    public ResponseEntity<VehicleDTO> getVehicleById(@PathVariable Long vehicleid) {
+        return vehicleService.getVehicleById(vehicleid)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
     
- // Get the price of a car by make
+    // Get the price of a car by make
     @GetMapping("/price/{make}")
     public Map<String, Object> getMakeAndPrice(@PathVariable String make) {
         Map<String, Object> result = new HashMap<>();
@@ -86,18 +86,18 @@ public class VehicleController {
     }
 
     // Endpoint for retrieving maintenance tasks by owner ID
-    @GetMapping("/maintenance/owner/{ownerId}")
-    public ResponseEntity<List<MaintenanceDTO>> getMaintenanceByOwnerId(@PathVariable Long ownerId) {
-        List<MaintenanceDTO> maintenanceList = vehicleService.getMaintenanceByOwnerId(ownerId);
+    @GetMapping("/maintenance/owner/{ownerid}")
+    public ResponseEntity<List<MaintenanceDTO>> getMaintenanceByOwnerId(@PathVariable Long ownerid) {
+        List<MaintenanceDTO> maintenanceList = vehicleService.getMaintenanceByOwnerId(ownerid);
         return ResponseEntity.ok(maintenanceList);
     }
     
     // Endpoint for updating an existing vehicle by ID
-    @PutMapping("/{id}")
-    public ResponseEntity<ResponseWrapper<VehicleDTO>> updateVehicle(@PathVariable Long id, @RequestBody VehicleDTO updatedVehicle) {
+    @PutMapping("/{vehicleid}")
+    public ResponseEntity<ResponseWrapper<VehicleDTO>> updateVehicle(@PathVariable Long vehicleid, @RequestBody VehicleDTO updatedVehicle) {
         try {
             // Attempt to update an existing vehicle
-            VehicleDTO updated = vehicleService.updateVehicle(id, updatedVehicle);
+            VehicleDTO updated = vehicleService.updateVehicle(vehicleid, updatedVehicle);
             return (updated != null) ?
                     ResponseEntity.ok(new ResponseWrapper<>("Vehicle updated successfully", updated)) :
                     ResponseEntity.notFound().build();
@@ -109,11 +109,11 @@ public class VehicleController {
     }
 
     // Endpoint for deleting a vehicle by ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteVehicle(@PathVariable Long id) {
+    @DeleteMapping("/{vehicleid}")
+    public ResponseEntity<String> deleteVehicle(@PathVariable Long vehicleid) {
         try {
             // Attempt to delete a vehicle
-            boolean deleted = vehicleService.deleteVehicle(id);
+            boolean deleted = vehicleService.deleteVehicle(vehicleid);
             return (deleted) ?
                     ResponseEntity.ok("Vehicle deleted successfully") :
                     ResponseEntity.notFound().build();

@@ -23,7 +23,7 @@ public interface VehicleService {
      * @param id The ID of the vehicle.
      * @return Optional containing the VehicleDTO if found, empty otherwise.
      */
-    Optional<VehicleDTO> getVehicleById(Long id);
+    Optional<VehicleDTO> getVehicleById(Long vehicleid);
 
     /**
      * Create a new vehicle.
@@ -40,7 +40,7 @@ public interface VehicleService {
      * @param vehicleDTO The updated VehicleDTO object.
      * @return The updated VehicleDTO.
      */
-    VehicleDTO updateVehicle(Long id, VehicleDTO vehicleDTO);
+    VehicleDTO updateVehicle(Long vehicleid, VehicleDTO vehicleDTO);
 
     /**
      * Delete a vehicle by its ID.
@@ -48,7 +48,7 @@ public interface VehicleService {
      * @param id The ID of the vehicle to delete.
      * @return True if the vehicle was deleted, false if it was not found.
      */
-    boolean deleteVehicle(Long id);
+    boolean deleteVehicle(Long vehicleid);
 
     /**
      * Get details of all vehicles along with owner first names.
@@ -71,7 +71,7 @@ public interface VehicleService {
      * @param ownerId The ID of the owner.
      * @return List of MaintenanceDTO objects for the specified owner ID.
      */
-    List<MaintenanceDTO> getMaintenanceByOwnerId(Long ownerId);
+    List<MaintenanceDTO> getMaintenanceByOwnerId(Long ownerid);
 
     /**
      * Get the price of a car by make.

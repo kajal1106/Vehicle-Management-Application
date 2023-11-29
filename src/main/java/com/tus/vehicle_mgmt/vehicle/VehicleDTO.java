@@ -21,13 +21,13 @@ import com.tus.vehicle_mgmt.owner.OwnerDTO;
 public class VehicleDTO {
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vehicle_id")
-    private Long vehicle_id;
+    @Column(name = "vehicleid")
+    private Long vehicleid;
 
     @Column(name = "make")
     private String make;
 
-    @Column(name = "registration") // Update to match your actual column name in the database
+    @Column(name = "registration")
     private String registration;
 
     @Column(name = "engine")
@@ -47,7 +47,7 @@ public class VehicleDTO {
 
     // Many vehicles can belong to one owner
     @ManyToOne
-    @JoinColumn(name = "owner_id")
+    @JoinColumn(name = "ownerid")
     private OwnerDTO owner;
 
     // One vehicle can have multiple maintenance tasks
@@ -58,8 +58,9 @@ public class VehicleDTO {
     }
 
     // Parameterized constructor
-    public VehicleDTO(String make, String registration, String model, String engine, int year, String car_transmission,
+    public VehicleDTO(Long vehicleid, String make, String registration, String model, String engine, int year, String car_transmission,
             int price) {
+    	this.vehicleid = vehicleid;
         this.make = make;
         this.registration = registration;
         this.engine = engine;
@@ -72,11 +73,11 @@ public class VehicleDTO {
     // Getter and Setter methods
 
     public Long getId() {
-        return vehicle_id;
+        return vehicleid;
     }
 
-    public void setId(Long vehicle_id) {
-        this.vehicle_id = vehicle_id;
+    public void setId(Long vehicleid) {
+        this.vehicleid = vehicleid;
     }
 
     public String getMake() {
@@ -157,7 +158,7 @@ public class VehicleDTO {
 
     @Override
     public String toString() {
-        return "VehicleDTO{" + "id=" + vehicle_id + ", make='" + make + '\'' + ", registration='" + registration + '\''
+        return "VehicleDTO{" + "id=" + vehicleid + ", make='" + make + '\'' + ", registration='" + registration + '\''
                 + ", engine='" + engine + '\'' + ", model='" + model + '\'' + ", year=" + year
                 + ", carTransmission='" + car_transmission + '\'' + ", price=" + price + ", owner=" + owner
                 + ", maintenanceList=" + maintenanceList + '}';
