@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tus.vehicle_mgmt.owner.OwnerDTO;
 import com.tus.vehicle_mgmt.vehicle.VehicleDTO;
 
@@ -25,11 +26,13 @@ public class MaintenanceDTO {
     @Column(name = "task")
     private String task;
     
-    @Column(name = "maintenance_date", columnDefinition = "DATE")
-    private LocalDate maintenanceDate; 
+    @Column(name = "due_date", columnDefinition = "DATE")
+    private LocalDate dueDate; 
     
     @ManyToOne
     @JoinColumn(name = "vehicleid")
+    @JsonIgnore
+
     private VehicleDTO vehicle;
 
 
@@ -42,10 +45,10 @@ public class MaintenanceDTO {
         this.task = task;
     }
     
-    public MaintenanceDTO(String task, VehicleDTO vehicle, LocalDate maintenanceDate) {
+    public MaintenanceDTO(String task, VehicleDTO vehicle, LocalDate dueDate) {
         this.task = task;
         this.vehicle = vehicle;
-        this.maintenanceDate = maintenanceDate;
+        this.dueDate = dueDate;
     }
 
     // Getters and setters
@@ -66,12 +69,12 @@ public class MaintenanceDTO {
         this.task = task;
     }
     
-    public LocalDate getMaintenanceDate() {
-        return maintenanceDate;
+    public LocalDate getDueDate() {
+        return dueDate;
     }
 
-    public void setMaintenanceDate(LocalDate maintenanceDate) {
-        this.maintenanceDate = maintenanceDate;
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
     }
     
     // Getter and Setter for vehicle

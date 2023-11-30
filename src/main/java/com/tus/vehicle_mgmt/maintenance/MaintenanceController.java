@@ -1,10 +1,12 @@
 package com.tus.vehicle_mgmt.maintenance;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -33,6 +35,28 @@ public class MaintenanceController {
         List<MaintenanceDTO> maintenanceList = maintenanceService.getMaintenanceByVehicle(vehicleid);
         return new ResponseEntity<>(maintenanceList, HttpStatus.OK);
     }
+    
+    // Endpoint for retrieving maintenance tasks by owner ID
+    @GetMapping("/owner/{ownerid}")
+    public ResponseEntity<List<MaintenanceDTO>> getMaintenanceByOwnerId(@PathVariable Long ownerid) {
+        List<MaintenanceDTO> maintenanceList = maintenanceService.getMaintenanceByOwnerId(ownerid);
+        return ResponseEntity.ok(maintenanceList);
+    }
+    
+    // Endpoint for retrieving maintenance tasks by vehicle make
+    @GetMapping("vehicles/make/{make}")
+    public ResponseEntity<List<MaintenanceDTO>> getMaintenanceByMake(@PathVariable String make) {
+        List<MaintenanceDTO> maintenanceList = maintenanceService.getMaintenanceByMake(make);
+        return ResponseEntity.ok(maintenanceList);
+    }
+    
+    @GetMapping("/due/{dueDate}")
+    public ResponseEntity<List<MaintenanceDTO>> getDueMaintenanceTasks(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dueDate) {
+        List<MaintenanceDTO> maintenanceList = maintenanceService.getDueMaintenanceTasks(dueDate);
+        return ResponseEntity.ok(maintenanceList);
+    }
+
+    
     @PostMapping
     public MaintenanceDTO createMaintenanceTask(@RequestBody MaintenanceDTO maintenanceDTO) {
         return maintenanceService.createMaintenanceTask(maintenanceDTO);
