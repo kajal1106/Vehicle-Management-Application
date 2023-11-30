@@ -1,14 +1,23 @@
-Vehicle Make,Registration,Engine,Model,Year,Car Transmission,Price,Owner First Name,Last Name,Owner ID,Maintenance Task,Due Date,Maintenance ID
-Toyota,ABC123,Petrol,Camry,2022,Automatic,25000.0,John,Doe,1,,,,
-Honda,XYZ456,Hybrid,Accord,2021,CVT,30000.0,Alice,Smith,2,,,,
-Ford,DEF789,Diesel,Mustang,2023,Manual,35000.0,Bob,Johnson,3,,,,
-Chevrolet,GHI012,Gas,Cruze,2022,Automatic,28000.0,John,Doe,1,,,,
-Volkswagen,JKL345,Electric,ID.4,2023,Automatic,40000.0,Alice,Smith,2,,,,
-BMW,MNO678,Petrol,X5,2021,Automatic,55000.0,Bob,Johnson,3,,,,
-,,,,,,,,,,,,,,Oil Change,2023-01-15,1
-,,,,,,,,,,,,,,Brake Inspection,2023-02-28,2
-,,,,,,,,,,,,,,Tire Rotation,2023-04-10,3
-,,,,,,,,,,,,,,Oil Change,2023-03-05,4
-,,,,,,,,,,,,,,Brake Inspection,2023-05-20,5
-,,,,,,,,,,,,,,Oil Change,2023-02-10,6
-,,,,,,,,,,,,,,Brake Inspection,2023-04-15,7
+Vehicle Make,Registration,Engine,Model,Year,Price
+Toyota,ABC123,Petrol,Camry,2022,25000.0
+Honda,XYZ456,Hybrid,Accord,2021,30000.0
+Ford,DEF789,Diesel,Mustang,2023,35000.0
+Chevrolet,GHI012,Gas,Cruze,2022,28000.0
+Volkswagen,JKL345,Electric,ID.4,2023,40000.0
+BMW,MNO678,Petrol,X5,2021,55000.0
+
+
+Owner First Name,Last Name,Owner ID
+John,Doe,1
+Alice,Smith,2
+Bob,Johnson,3
+
+
+Maintenance Task,Due Date,Maintenance ID
+Oil Change,2023-01-15,1
+Brake Inspection,2023-02-28,2
+Tire Rotation,2023-04-10,3
+Oil Change,2023-03-05,4
+Brake Inspection,2023-05-20,5
+Oil Change,2023-02-10,6
+Brake Inspection,2023-04-15,7
