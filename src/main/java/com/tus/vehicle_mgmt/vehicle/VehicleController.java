@@ -3,6 +3,7 @@ package com.tus.vehicle_mgmt.vehicle;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,10 +92,30 @@ public class VehicleController {
     
     // Endpoint for retrieving details of all vehicles with owner first names
     @GetMapping("/details")
-    public ResponseEntity<List<Object[]>> getVehicleDetailsWithOwnerFirstName() {
+    public ResponseEntity<List<Map<String, Object>>> getVehicleDetailsWithOwnerFirstName() {
         List<Object[]> result = vehicleService.getVehicleDetailsWithOwnerFirstName();
-        return new ResponseEntity<>(result, HttpStatus.OK);
+
+        // Convert the result to a list of maps
+        List<Map<String, Object>> responseList = result.stream()
+                .map(objects -> {
+                    Map<String, Object> vehicleDetailsMap = new HashMap<>();
+                    vehicleDetailsMap.put("id", objects[0]);
+                    vehicleDetailsMap.put("make", objects[1]);
+                    vehicleDetailsMap.put("registration", objects[2]);
+                    vehicleDetailsMap.put("engine", objects[3]);
+                    vehicleDetailsMap.put("model", objects[4]);
+                    vehicleDetailsMap.put("year", objects[5]);
+                    vehicleDetailsMap.put("carTransmission", objects[6]);
+                    vehicleDetailsMap.put("price", objects[7]);
+                    vehicleDetailsMap.put("ownerId", objects[8]);
+                    vehicleDetailsMap.put("ownerFirstName", objects[9]);
+                    return vehicleDetailsMap;
+                })
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
     }
+
     
     // Endpoint for updating an existing vehicle by ID
     @PutMapping("/{vehicleid}")
