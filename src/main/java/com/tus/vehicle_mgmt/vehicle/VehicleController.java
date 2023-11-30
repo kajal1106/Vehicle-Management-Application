@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tus.vehicle_mgmt.maintenance.MaintenanceDTO;
 
 @RestController
 @RequestMapping("/vehicles")
@@ -71,25 +70,30 @@ public class VehicleController {
         return result;
     }
     
+    
+ // Endpoint for finding vehicles by engine type
+    @GetMapping("/engineType/{engine}")
+    public ResponseEntity<ResponseWrapper<List<VehicleDTO>>> getVehiclesByEngineType(@PathVariable String engine) {
+        try {
+            // Attempt to find vehicles by engine type
+            List<VehicleDTO> vehicles = vehicleService.getVehiclesByEngineType(engine);
+            
+            // Check if the list is not empty
+                return (vehicles != null) ?
+                ResponseEntity.ok(new ResponseWrapper<>("List of vehicles by engine type", vehicles)) :
+                    ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            // Handle exceptions when finding vehicles by engine type
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseWrapper<>("Error updating vehicle", null));
+        }
+    }
+    
     // Endpoint for retrieving details of all vehicles with owner first names
     @GetMapping("/details")
     public ResponseEntity<List<Object[]>> getVehicleDetailsWithOwnerFirstName() {
         List<Object[]> result = vehicleService.getVehicleDetailsWithOwnerFirstName();
         return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-    
-    // Endpoint for retrieving maintenance tasks by vehicle make
-    @GetMapping("/maintenance/{make}")
-    public ResponseEntity<List<MaintenanceDTO>> getMaintenanceByMake(@PathVariable String make) {
-        List<MaintenanceDTO> maintenanceList = vehicleService.getMaintenanceByMake(make);
-        return ResponseEntity.ok(maintenanceList);
-    }
-
-    // Endpoint for retrieving maintenance tasks by owner ID
-    @GetMapping("/maintenance/owner/{ownerid}")
-    public ResponseEntity<List<MaintenanceDTO>> getMaintenanceByOwnerId(@PathVariable Long ownerid) {
-        List<MaintenanceDTO> maintenanceList = vehicleService.getMaintenanceByOwnerId(ownerid);
-        return ResponseEntity.ok(maintenanceList);
     }
     
     // Endpoint for updating an existing vehicle by ID
@@ -143,4 +147,5 @@ public class VehicleController {
             return data;
         }
     }
+
 }

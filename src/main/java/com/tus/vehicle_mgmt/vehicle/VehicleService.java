@@ -3,8 +3,6 @@ package com.tus.vehicle_mgmt.vehicle;
 import java.util.List;
 import java.util.Optional;
 
-import com.tus.vehicle_mgmt.maintenance.MaintenanceDTO;
-
 /**
  * Service interface for managing vehicles.
  */
@@ -56,23 +54,6 @@ public interface VehicleService {
      * @return List of Object arrays containing vehicle details with owner first names.
      */
     List<Object[]> getVehicleDetailsWithOwnerFirstName();
-
-    /**
-     * Get maintenance records for vehicles by make.
-     *
-     * @param make The make of the vehicles.
-     * @return List of MaintenanceDTO objects for the specified make.
-     */
-    List<MaintenanceDTO> getMaintenanceByMake(String make);
-
-    /**
-     * Get maintenance records for vehicles by owner ID.
-     *
-     * @param ownerId The ID of the owner.
-     * @return List of MaintenanceDTO objects for the specified owner ID.
-     */
-    List<MaintenanceDTO> getMaintenanceByOwnerId(Long ownerid);
-
     /**
      * Get the price of a car by make.
      *
@@ -80,4 +61,6 @@ public interface VehicleService {
      * @return The price of the car.
      */
     Double getPriceByMake(String make);
+
+	List<VehicleDTO> getVehiclesByEngineType(String engine);
 }

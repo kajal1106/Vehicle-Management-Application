@@ -8,8 +8,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tus.vehicle_mgmt.maintenance.MaintenanceDTO;
-
 /**
  * Service implementation for managing vehicles.
  */
@@ -22,29 +20,6 @@ public class VehicleServiceImpl implements VehicleService {
     public VehicleServiceImpl(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
-
-    /**
-     * Get maintenance records for vehicles by make.
-     *
-     * @param make The make of the vehicles.
-     * @return List of MaintenanceDTO objects for the specified make.
-     */
-    @Override
-    public List<MaintenanceDTO> getMaintenanceByMake(String make) {
-        return vehicleRepository.findMaintenanceByMake(make);
-    }
-
-    /**
-     * Get maintenance records for vehicles by owner ID.
-     *
-     * @param ownerId The ID of the owner.
-     * @return List of MaintenanceDTO objects for the specified owner ID.
-     */
-    @Override
-    public List<MaintenanceDTO> getMaintenanceByOwnerId(Long ownerid) {
-        return vehicleRepository.findMaintenanceByOwnerId(ownerid);
-    }
-
     /**
      * Get a list of all vehicles.
      *
@@ -78,6 +53,19 @@ public class VehicleServiceImpl implements VehicleService {
     public Double getPriceByMake(String make) {
         return vehicleRepository.findPriceByMake(make);
     }
+    
+    /**
+     * Get the list of vehicles by Engine Type.
+     *
+     * @param .
+     * @return 
+     */
+    @Override
+    
+    public List<VehicleDTO> getVehiclesByEngineType(String engine) {
+        return vehicleRepository.findByEngineType(engine);
+    }
+
 
     /**
      * Create a new vehicle.
