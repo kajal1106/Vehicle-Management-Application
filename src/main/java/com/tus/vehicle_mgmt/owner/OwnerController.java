@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/owners")
+@RequestMapping("/vehicle-management/owners")
 public class OwnerController {
     private final OwnerService ownerService;
 

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/maintenance")
+@RequestMapping("/vehicle-management/maintenance")
 public class MaintenanceController {
     private final MaintenanceService maintenanceService;
 
