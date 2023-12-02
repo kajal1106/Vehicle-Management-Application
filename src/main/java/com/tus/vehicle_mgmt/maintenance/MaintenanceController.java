@@ -23,10 +23,15 @@ public class MaintenanceController {
     public List<MaintenanceDTO> getAllMaintenanceTasks() {
         return maintenanceService.getAllMaintenanceTasks();
     }
+    @GetMapping("{task}")
+    public ResponseEntity<MaintenanceDTO> getMaintenanceTaskByName(@PathVariable String task) {
+        MaintenanceDTO maintenanceTask = maintenanceService.getMaintenanceTaskByName(task);
 
-    @GetMapping("/{maintenanceid}")
-    public MaintenanceDTO getMaintenanceTaskById(@PathVariable Long maintenanceid) {
-        return maintenanceService.getMaintenanceTaskById(maintenanceid);
+        if (maintenanceTask != null) {
+            return ResponseEntity.ok(maintenanceTask);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
     
     // Endpoint for retrieving maintenance tasks by vehicle ID

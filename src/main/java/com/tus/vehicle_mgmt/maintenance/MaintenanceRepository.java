@@ -2,6 +2,7 @@ package com.tus.vehicle_mgmt.maintenance;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,4 +33,7 @@ public interface MaintenanceRepository extends JpaRepository<MaintenanceDTO, Lon
     @Query("SELECT m FROM Maintenance m WHERE m.dueDate <= :dueDate")
     List<MaintenanceDTO> findDueMaintenanceTasks(@Param("dueDate") LocalDate dueDate);
 
+
+    @Query("SELECT m FROM Maintenance m WHERE m.task = :task")
+    List<MaintenanceDTO> findByTask(@Param("task") String task);
 }

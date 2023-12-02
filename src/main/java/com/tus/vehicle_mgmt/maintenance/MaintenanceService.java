@@ -49,11 +49,17 @@ public class MaintenanceService {
         return maintenanceRepository.save(maintenanceTask);
     }
 
-    public MaintenanceDTO getMaintenanceTaskById(Long taskId) {
-        // Implement logic to retrieve a maintenance task by ID
-        return maintenanceRepository.findById(taskId).orElse(null);
+    public MaintenanceDTO getMaintenanceTaskByName(String task) {
+        List<MaintenanceDTO> tasks = maintenanceRepository.findByTask(task);
+
+        if (!tasks.isEmpty()) {
+            // If there are multiple tasks with the same name, you may need to decide which one to return
+            // For now, this example returns the first task found
+            return tasks.get(0);
+        } else {
+            return null; // Task not found
+        }
     }
-    
     public List<MaintenanceDTO> getDueMaintenanceTasks(LocalDate dueDate) {
         return maintenanceRepository.findDueMaintenanceTasks(dueDate);
     }
