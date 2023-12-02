@@ -24,8 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
-        httpBasic().and()
+        httpBasic().and().headers().frameOptions().disable().and()
     	.authorizeRequests(authorize -> authorize
+    			.antMatchers("/console/**").permitAll()
                 .antMatchers("/vehicle-management/**").hasAnyRole("ADMIN"))
                .csrf().disable(); // Disable CSRF for testing purposes
     }
